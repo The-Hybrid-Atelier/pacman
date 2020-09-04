@@ -249,7 +249,7 @@ function erasePacman() {
 
 function killPacman() { 
 	playDieSound();
-
+	socket.jsend({event: "DIE", lives: LIFES});
 	LOCK = true;
 	PACMAN_DEAD = true;
 	stopPacman();
@@ -322,9 +322,11 @@ function testBubblesPacman() {
 				var type = bubbleParams[3];
 							
 				eraseBubble( type, testX, testY );
+				socket.jsend({event:"EAT", bubbles_left: BUBBLES_COUNTER})
 				BUBBLES_ARRAY[i] = bubble.substr( 0, bubble.length - 1 ) + "1"
 				
 				if ( type === "s" ) { 
+					// socket.jsend({event:"GHOST_MODE"})
 					setSuperBubbleOnXY( testX, testY, "1" );
 					score( SCORE_SUPER_BUBBLE );
 					playEatPillSound();

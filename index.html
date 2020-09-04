@@ -40,6 +40,8 @@
 		<script type="text/javascript" src="js/ghosts.js"></script>
 		<script type="text/javascript" src="js/home.js"></script>
 		<script type="text/javascript" src="js/sound.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore.js"></script>
+		<script type="text/javascript" src="js/scc.js"></script>
 		
 		<script type="text/javascript">		
 			
@@ -53,9 +55,11 @@
 				e.keyCode = code;
 				jQuery('body').trigger(e);
 			}
-			
+			window.socket = undefined;
 			$(document).ready(function() { 
 				//$.mobile.loading().hide();
+				window.socket = start_socket("162.243.120.86", 3001)
+
 				loadAllSound();
 				
 				HELP_TIMER = setInterval('blinkHelp()', HELP_DELAY);
@@ -222,7 +226,7 @@
 	
 		<div id="panel">
 			<h1>pac-man</h1>
-			<a class="putchu" target="_top" href="http://www.putchu.be"><img src="http://www.putchu.be/img/intro/player.png" height="65px" alt="Putchu">www.putchu.be</a>
+			
 			<canvas id="canvas-panel-title-pacman"></canvas>
 			<div id="score"><h2>1UP</h2><span>00</span></div>
 			<div id="highscore"><h2>High Score</h2><span>00</span></div>
@@ -255,7 +259,7 @@
 			<div class="help-button">- help -</div>
 			<a class="sound" href="javascript:void(0);" data-sound="on"><img src="img/sound-on.png" alt="" border="0"></a>
 		</div>
-	
+		
 	</body>
 	
 </html>

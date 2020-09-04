@@ -161,13 +161,14 @@ function affraidGhosts() {
 	playWazaSound();
 	
 	SCORE_GHOST_COMBO = 200;
-
+	socket.jsend({event:"GHOST_MODE", state: "on"})
 	affraidGhost("blinky");
 	affraidGhost("pinky");
 	affraidGhost("inky");
 	affraidGhost("clyde");
 }
 function affraidGhost(ghost) { 
+	
 	if ( eval('GHOST_' + ghost.toUpperCase() + '_AFFRAID_TIMER !== null') ) { 
 		eval('GHOST_' + ghost.toUpperCase() + '_AFFRAID_TIMER.cancel()');
 		eval('GHOST_' + ghost.toUpperCase() + '_AFFRAID_TIMER = null');
@@ -181,6 +182,7 @@ function affraidGhost(ghost) {
 	}
 }
 function cancelAffraidGhost(ghost) { 
+	socket.jsend({event:"GHOST_MODE", state: "off"})
 	if (eval('GHOST_' + ghost.toUpperCase() + '_STATE === 1')) { 
 		eval('GHOST_' + ghost.toUpperCase() + '_AFFRAID_TIMER.cancel()');
 		eval('GHOST_' + ghost.toUpperCase() + '_AFFRAID_TIMER = null');
@@ -210,7 +212,7 @@ function testStateGhosts() {
 }
 
 function startEatGhost(ghost) { 
-	
+	socket.jsend({event:"EAT_GHOST"})
 	if ( !LOCK ) { 
 		playEatGhostSound();
 

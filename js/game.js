@@ -101,7 +101,7 @@ function initGame(newgame) {
 
 function win() { 
 	stopAllSound();
-
+	socket.jsend({event: "WIN"});
 	LOCK = true;
 	stopPacman();
 	stopGhosts();
@@ -169,7 +169,7 @@ function retry() {
 function ready() { 
 	LOCK = true;
 	message("ready!");
-	
+	socket.jsend({event: "READY"});
 	playReadySound();
 	setTimeout("go()", "4100");
 }
